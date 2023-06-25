@@ -1,0 +1,296 @@
+{% extends 'eshop/base.html' %}
+{% load static %}
+
+{% block inner_head %}
+
+<div class="col-lg-3">
+	<div class="all-category">
+		<h3 class="cat-heading"><i class="fa fa-bars" aria-hidden="true"></i>CATEGORIES</h3>
+		<ul class="main-category">
+
+			{% for category in categories %}
+
+			<li><a href="#">{{ category.name }}</a></li>
+
+			{% endfor %}
+
+		</ul>
+	</div>
+</div>
+{% endblock inner_head %}
+
+{% block content %}
+
+<!-- Slider Area -->
+<section class="hero-slider">
+	<!-- Single Slider -->
+	<div class="single-slider">
+		<div class="container">
+			<div class="row no-gutters">
+				<div class="col-lg-9 offset-lg-3 col-12">
+					<div class="text-inner">
+						<div class="row">
+							<div class="col-lg-7 col-12">
+								<div class="hero-text">
+									<h1><span>UP TO 24% OFF </span>Shirt For Man</h1>
+									<p>Maboriosam in a nesciung eget magnae <br> dapibus disting tloctio in the find it
+										pereri <br> odiy maboriosm.</p>
+									<div class="button">
+										{% if user.is_authenticated %}
+
+										{% else %}
+										<a href="{% url 'user-login' %}" class="btn">Shop Now!</a>
+
+										{% endif %}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--/ End Single Slider -->
+</section>
+<!--/ End Slider Area -->
+
+<!-- Start Product Area -->
+<div class="product-area section">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="section-title">
+					<h2>Men's Trending Items</h2>
+					<div class="tab-pane fade show active" id="man" role="tabpanel">
+						<div class="tab-single">
+							<div class="row">
+								{% for i in mens_trending_itmes %}
+								<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+									<div class="single-product">
+										<div class="product-img">
+											<a href="{% url 'detail' i.pk %}">
+												<img class="default-img" src="{{ i.featured_image.url }}"
+													alt="#">
+												<img class="hover-img" src="{{ i.featured_image.url }}"
+													alt="#">
+											</a>
+
+										</div>
+										<div class="product-content">
+											<h3><a href="{% url 'detail' i.pk %}">{{ i.name }}</a></h3>
+											<div class="product-price">
+												<span>Rs. {{ i.discounted_price }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-12">
+				<div class="section-title">
+					<h2>Women's Trending Items</h2>
+					<div class="tab-pane fade show active" id="man" role="tabpanel">
+						<div class="tab-single">
+							<div class="row">
+								{% for i in womens_trending_itmes %}
+								<div class="col-xl-3 col-lg-4 col-md-4 col-12">
+									<div class="single-product">
+										<div class="product-img">
+											<a href="{% url 'detail' i.pk %}">
+												<img class="default-img" src="{{ i.featured_image.url }}"
+													alt="{{ i.name }}">
+												<img class="hover-img" src="{{ i.featured_image.url }}"
+													alt="{{ i.name }}">
+											</a>
+
+										</div>
+										<div class="product-content">
+											<h3><a href="{% url 'detail' i.pk %}">{{ i.name }}</a></h3>
+											<div class="product-price">
+												<span>Rs. {{ i.discounted_price }}</span>
+											</div>
+										</div>
+									</div>
+								</div>
+								{% endfor %}
+								
+
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+<!-- End Product Area -->
+
+<!-- Start Midium Banner  -->
+<section class="midium-banner">
+	<div class="container">
+		<div class="row">
+			<!-- Single Banner  -->
+			<div class="col-lg-6 col-md-6 col-12">
+				<div class="single-banner">
+					<img src="https://via.placeholder.com/600x370" alt="#">
+					<div class="content">
+						<p>Man's Collectons</p>
+						<h3>Man's items <br>Up to<span> 50%</span></h3>
+						<a href="#">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<!-- /End Single Banner  -->
+			<!-- Single Banner  -->
+			<div class="col-lg-6 col-md-6 col-12">
+				<div class="single-banner">
+					<img src="https://via.placeholder.com/600x370" alt="#">
+					<div class="content">
+						<p>shoes women</p>
+						<h3>mid season <br> up to <span>70%</span></h3>
+						<a href="#" class="btn">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<!-- /End Single Banner  -->
+		</div>
+	</div>
+</section>
+<!-- End Midium Banner -->
+
+<!-- Start Most Popular -->
+<div class="product-area most-popular section">
+
+</div>
+<!-- End Most Popular Area -->
+
+<!-- Start Shop Home List  -->
+<section class="shop-home-list section">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-4 col-md-6 col-12">
+				<div class="row">
+					<div class="col-12">
+						<div class="shop-section-title">
+							<h1>On sale</h1>
+						</div>
+					</div>
+				</div>
+				<!-- Start Single List  -->
+				{% for item in on_sales %}
+
+				<div class="single-list">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="list-image overlay">
+								<a href="#" class="buy"></a>
+								<img src="{{ item.featured_image.url }}" alt="#">
+								<span class="price-dec">{{ item.discont_percent }}% Off</span>
+								<i class="fa fa-shopping-bag"></i></a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-12 no-padding">
+							<div class="content">
+
+								<h4 class="title"><a href="{% url 'detail' item.pk %}">{{ item.name }}</a></h4>
+								<p class="price with-discount">{{ item.price}}</p>
+
+							</div>
+						</div>
+					</div>
+				</div>
+
+				{% endfor %}
+
+				<!-- End Single List  -->
+
+
+			</div>
+			<div class="col-lg-4 col-md-6 col-12">
+				<div class="row">
+					<div class="col-12">
+						<div class="shop-section-title">
+							<h1>Top Price</h1>
+						</div>
+					</div>
+				</div>
+				{% for item in top_price %}
+				<!-- Start Single List  -->
+				<div class="single-list">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="list-image overlay">
+								<img src="{{ item.featured_image.url }}" alt="{{ item.name }}">
+								<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-12 no-padding">
+							<div class="content">
+								<h5 class="title"><a href="{% url 'detail' item.pk %}">{{ item.name }}</a></h5>
+								<p class="price with-discount">{{ item.discounted_price }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- End Single List  -->
+				{% endfor %}
+			</div>
+			<div class="col-lg-4 col-md-6 col-12">
+				<div class="row">
+					<div class="col-12">
+						<div class="shop-section-title">
+							<h1>Recently lunched</h1>
+						</div>
+					</div>
+				</div>
+				<!-- Start Single List  -->
+				{% if recent_items %}
+				{% for item in recent_items %}
+				<div class="single-list">
+					<div class="row">
+						<div class="col-lg-6 col-md-6 col-12">
+							<div class="list-image overlay">
+								<img src="{{ item.featured_image.url }}" alt="{{ item.name }}">
+								<a href="#" class="buy"><i class="fa fa-shopping-bag"></i></a>
+							</div>
+						</div>
+						<div class="col-lg-6 col-md-6 col-12 no-padding">
+							<div class="content">
+								<h5 class="title"><a href="{% url 'detail' item.pk %}">{{ item.name }}</a></h5>
+								<p class="price with-discount">{{ item.discounted_price }}</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				{% endfor %}
+				{% else %}
+				<p>No recently launched items found.</p>
+				{% endif %}
+				<!-- End Single List  -->
+
+			</div>
+		</div>
+	</div>
+</section>
+<!-- End Shop Home List  -->
+
+
+
+<!-- Start Shop Blog  -->
+<section class="shop-blog section">
+
+</section>
+<!-- End Shop Blog  -->
+
+
+{% include 'eshop/shop_services_area.html' %}
+{% include 'eshop/newsletter.html' %}
+
+{% endblock content %}

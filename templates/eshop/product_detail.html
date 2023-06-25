@@ -1,0 +1,246 @@
+{% extends 'eshop/base.html' %}
+{% load static %}
+{% block content %}
+
+</header>
+<!--/ End Header -->
+
+<!-- Breadcrumbs -->
+<div class="breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-12">
+				<div class="bread-inner">
+					<ul class="bread-list">
+						<li><a href="/">Home<i class="ti-arrow-right"></i></a></li>
+						<li class="active"><a href="blog-single.html">Product Detail</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- End Breadcrumbs -->
+
+<!-- Start Blog Single -->
+<section class="blog-single section">
+	<div class="container">
+		<div class="blog-detail">
+			<h2 class="blog-title">{{ item.name }}</h2>
+		</div>
+		<div class="row">
+			<div class="col-lg-5 col-12">
+				<div class="blog-single-main">
+
+					<div class="col-12">
+						<div class="image">
+							<img src="{{ item.featured_image.url }}" alt="{{ item.name }}">
+						</div>
+
+					</div>
+
+				</div>
+			</div>
+			<div class="col-lg-7 col-12">
+				<div class="main-sidebar">
+					<form method="POST" action="{% url 'detail' item.id %}">
+						{% csrf_token %}
+						<div class="blog-detail">
+							<h2 class="blog-title">{{item.name}}</h2>
+						</div>
+						<br>
+						<h6><span>{{ item.seller }}</span></h6>
+						<br>
+						<h6 style="color: orange;">Rs. <span>{{ item.price }}</span></h6>
+						<br>
+						<br>
+						<!-- start qty take it to the center-->
+						<h6 class="title">Quantity</h6>
+
+
+						<!-- Input Order -->
+						<div class="input-group">
+							<!-- <span><h6 class="title">Qty. </h6></span> -->
+							<div class="button minus">
+								<button type="button" class="btn btn-primary btn-number" data-type="minus"
+									data-field="quantity">
+									<i class="ti-minus"></i>
+								</button>
+							</div>
+							<input type="number" id="quantity" name="quantity" class="input-number" data-min="1"
+								data-max="100" value="1" style="width: 18%; text-align: center;">
+							<div class="button plus">
+								<button type="button" class="btn btn-primary btn-number" data-type="plus"
+									data-field="quantity">
+									<i class="ti-plus"></i>
+								</button>
+							</div>
+						</div>
+						<!--/ End Input Order -->
+						</td>
+						<br>
+						<!-- end qty -->
+						<!-- start buttons -->
+						<div class="d-grid gap-2 d-md-block">
+							{% if user.is_authenticated %}
+
+							<a href="{% url 'cart' %}"><button class="btn btn-primary" type="button">Buy
+									Now</button></a>
+							{% else %}
+							<a href="{% url 'user-login' %}"><button class="btn btn-primary" type="button">Buy
+									Now</button></a>
+							{% endif %}
+							{% if user.is_authenticated %}
+
+							<button class="btn btn-primary" type="submit">Add to Cart</button>
+							{% else %}
+							<a href="{% url 'user-login' %}"><button class="btn btn-primary" type="button">Add to
+									Cart</button></a>
+							{% endif %}
+
+						</div>
+						<!-- end buttons -->
+					</form>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="row">
+			<div class="col-lg-8 col-12">
+
+				<div class="blog-single-main">
+					<div class="row">
+						<div class="col-12">
+							<div class="blog-detail">
+								<h2 class="blog-title">What are the secrets to start- up success?</h2>
+							</div>
+							<div class="content">
+								<p>What a crazy time. I have five children in colleghigh school graduates.jpge or
+									pursing post graduate studies Each of my children attends college far from home,
+									the closest of which is more than 800 miles away. While I miss being with my
+									older children, I know that a college experience can be the source of great
+									growth and experience can be the source of source of great growth and can
+									provide them with even greater in future.</p>
+
+							</div>
+						</div>
+
+					</div>
+					<div class="col-12">
+						<div class="comments">
+							<h3 class="comment-title">Comments (3)</h3>
+							<!-- Single Comment -->
+							<div class="single-comment">
+								<img src="https://via.placeholder.com/80x80" alt="#">
+								<div class="content">
+									<h4>Alisa harm <span>At 8:59 pm On Feb 28, 2018</span></h4>
+									<p>Enthusiastically leverage existing premium quality vectors with
+										enterprise-wide innovation collaboration Phosfluorescently leverage others
+										enterprisee Phosfluorescently leverage.</p>
+									<div class="button">
+										<a href="#" class="btn"><i class="fa fa-reply" aria-hidden="true"></i>Reply</a>
+									</div>
+								</div>
+							</div>
+							<!-- End Single Comment -->
+							<!-- Single Comment -->
+							<div class="single-comment left">
+								<img src="https://via.placeholder.com/80x80" alt="#">
+								<div class="content">
+									<h4>john deo <span>Feb 28, 2018 at 8:59 pm</span></h4>
+									<p>Enthusiastically leverage existing premium quality vectors with
+										enterprise-wide innovation collaboration Phosfluorescently leverage others
+										enterprisee Phosfluorescently leverage.</p>
+									<div class="button">
+										<a href="#" class="btn"><i class="fa fa-reply" aria-hidden="true"></i>Reply</a>
+									</div>
+								</div>
+							</div>
+							<!-- End Single Comment -->
+							<!-- Single Comment -->
+							<div class="single-comment">
+								<img src="https://via.placeholder.com/80x80" alt="#">
+								<div class="content">
+									<h4>megan mart <span>Feb 28, 2018 at 8:59 pm</span></h4>
+									<p>Enthusiastically leverage existing premium quality vectors with
+										enterprise-wide innovation collaboration Phosfluorescently leverage others
+										enterprisee Phosfluorescently leverage.</p>
+									<div class="button">
+										<a href="#" class="btn"><i class="fa fa-reply" aria-hidden="true"></i>Reply</a>
+									</div>
+								</div>
+							</div>
+							<!-- End Single Comment -->
+						</div>
+					</div>
+					<div class="col-12">
+						<div class="reply">
+							<div class="reply-head">
+								<h2 class="reply-title">Leave a Comment</h2>
+								<!-- Comment Form -->
+								<form class="form" action="#">
+									<div class="row">
+										<div class="col-lg-6 col-md-6 col-12">
+											<div class="form-group">
+												<label>Your Name<span>*</span></label>
+												<input type="text" name="name" placeholder="" required="required">
+											</div>
+										</div>
+										<div class="col-lg-6 col-md-6 col-12">
+											<div class="form-group">
+												<label>Your Email<span>*</span></label>
+												<input type="email" name="email" placeholder="" required="required">
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group">
+												<label>Your Message<span>*</span></label>
+												<textarea name="message" placeholder=""></textarea>
+											</div>
+										</div>
+										<div class="col-12">
+											<div class="form-group button">
+												<button type="submit" class="btn">Post comment</button>
+											</div>
+										</div>
+									</div>
+								</form>
+								<!-- End Comment Form -->
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-12">
+				<div class="main-sidebar">
+
+					<!-- Single Widget -->
+					<div class="single-widget recent-post">
+						<h3 class="title">Similar Products</h3>
+						<!-- Single Post -->
+						<div class="single-post">
+							<div class="image">
+								<img src="https://via.placeholder.com/100x100" alt="#">
+							</div>
+							<div class="content">
+								<h5><a href="#">Top 10 Beautyful Women Dress in the world</a></h5>
+								<ul class="comment">
+									<li><i class="fa fa-calendar" aria-hidden="true"></i>Jan 11, 2020</li>
+									<li><i class="fa fa-commenting-o" aria-hidden="true"></i>35</li>
+								</ul>
+							</div>
+						</div>
+						<!-- End Single Post -->
+
+					</div>
+					<!--/ End Single Widget -->
+
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--/ End Blog Single -->
+
+{% endblock content %}

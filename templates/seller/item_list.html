@@ -1,0 +1,20 @@
+{% extends "seller/base.html" %}
+
+{% block content %}
+  <div class="row">
+    <div class="col">
+      {% for item in items %}
+        <div class="item">
+          <div class="date">{{ item.listed_at }}</div>
+          <h1>
+            <a href="{% url 'seller:item-detail' item.pk %}">{{ item.name }}</a>
+          </h1>
+          <div class="date author">@{{ item.seller.username }}</div>
+          <p>
+            {{ item.detail|striptags|safe|truncatechars:200 }} <a href="{% url 'seller:item-detail' item.pk %}">View more</a>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock content %}

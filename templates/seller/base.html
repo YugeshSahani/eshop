@@ -1,0 +1,59 @@
+{% load static %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Eshop Selller</title>
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  </head>
+  <body>
+ 
+ 
+    <div class="page-header">
+
+      {% if user.is_authenticated %}
+        <a href="{% url 'seller-logout' %}" class="top-menu">
+          <span class="material-symbols-outlined lg-icons">logout</span>
+        </a>
+
+        <a href="{% url 'seller:item-create' %}" class="top-menu">
+          <span class="material-symbols-outlined lg-icons">add</span>
+        </a>
+
+        <a href="{% url 'seller:draft-list' %}" class="top-menu">
+          <span class="material-symbols-outlined lg-icons">draft</span>
+        </a>
+ 
+      {% else %}
+        <a href="{% url 'seller-login' %}" class="top-menu">
+          <span class="material-symbols-outlined lg-icons">login</span>
+        </a>
+ 
+      {% endif %}
+
+      <h1>
+        <a href="{% url 'seller:item-list' %}">
+          <img src="{% static 'images/logo.png' %}"
+               alt="Eshop Seller"
+               width="90px;">
+          Eshop Seller
+        </a>
+      </h1>
+    </div>
+    <div class="container content">
+      {% block content %}
+ 
+      {% endblock content %}
+    </div>
+    <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+  </body>
+</html>

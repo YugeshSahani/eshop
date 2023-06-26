@@ -74,6 +74,18 @@ class ProductDetail(DetailView):
         queryset = Item.objects.filter(pk=self.kwargs["pk"], listed_at__isnull=False)
         return queryset
 
+    def get_context_data(self, **kwargs):
+            context = super().get_context_data(**kwargs)
+            
+            # Retrieve the current item
+            current_item = self.get_object()
+
+            # Retrieve four other items of the same category
+            related_items = Item.objects.filter(category=current_item.category).exclude(pk=current_item.pk)[:4]
+
+            context['related_items'] = related_items
+            return context
+
     def post(self, request, *args, **kwargs):
         item = self.get_object()
         quantity = int(request.POST.get('quantity', 1))
@@ -92,7 +104,6 @@ class ProductDetail(DetailView):
 
         # Optionally, you can perform additional logic or redirect to the cart page
         return redirect('cart')  # Replace 'cart' with the URL name of your cart page
-
 
 
 class ShopGrid(ListView):

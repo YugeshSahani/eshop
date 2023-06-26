@@ -219,18 +219,17 @@
 					<div class="single-widget recent-post">
 						<h3 class="title">Similar Products</h3>
 						<!-- Single Post -->
+						{% for item in related_items %}
 						<div class="single-post">
 							<div class="image">
-								<img src="https://via.placeholder.com/100x100" alt="#">
+								<img src="{{ item.featured_image.url }}" alt="{{ item.name }}">
 							</div>
 							<div class="content">
-								<h5><a href="#">Top 10 Beautyful Women Dress in the world</a></h5>
-								<ul class="comment">
-									<li><i class="fa fa-calendar" aria-hidden="true"></i>Jan 11, 2020</li>
-									<li><i class="fa fa-commenting-o" aria-hidden="true"></i>35</li>
-								</ul>
+								<h5><a href="{% url 'detail' item.pk %}">{{ item.name }}</a></h5>
+								<p>Rs. {{ item.discounted_price }}</p>
 							</div>
 						</div>
+						{% endfor %}
 						<!-- End Single Post -->
 
 					</div>

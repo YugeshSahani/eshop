@@ -10,7 +10,8 @@
 
 			{% for category in categories %}
 
-			<li><a href="#">{{ category.name }}</a></li>
+			<li>
+				<a href="{% url 'item-by-category' category.pk %}">{{ category.name|title }}</a></li>
 
 			{% endfor %}
 

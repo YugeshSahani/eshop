@@ -16,7 +16,7 @@ Including another URLconf
 """
 
 from django.urls import path
-from  shop_app.views import Home, Contact, About, ShopGrid, Checkout, ProductDetail,CartItemDeleteView, CartListView, CartItemUpdateView, NewsletterView, SearchItemView
+from  shop_app.views import Home, Contact, About, ShopGrid, Checkout, ItemByCategoryView, ProductDetail,CartItemDeleteView, CartListView, CartItemUpdateView, NewsletterView, SearchItemView
 
 urlpatterns = [
     path("", Home.as_view(), name="home"),
@@ -25,11 +25,11 @@ urlpatterns = [
     path("detail/<int:pk>/", ProductDetail.as_view(), name="detail"),
     path("shop-grid/", ShopGrid.as_view(), name="shop-grid"),
     path("search-item/", SearchItemView.as_view(), name="search-item"),
+    path("item-by-category/<int:category_id>/", ItemByCategoryView.as_view(), name="item-by-category"),
     path("cart/", CartListView.as_view(), name="cart"),
     path("update-cart-item/<int:pk>", CartItemUpdateView.as_view(), name="update-cart-item"),
     path("checkout/", Checkout.as_view(), name="checkout"),
     path("delete-cart-item/<int:pk>/", CartItemDeleteView.as_view(), name="delete-cart-item"),
     path("newsletter/", NewsletterView.as_view(), name="newsletter"),
-
 ]
 

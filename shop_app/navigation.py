@@ -1,4 +1,4 @@
-from shop_app.models import Item, Category, TrendingItemCategory, Brand
+from shop_app.models import Item, Category, Brand
 
 
 def navigation(request):
@@ -9,9 +9,6 @@ def navigation(request):
 
     return {
         # "recent_items": recent_items,
-        # "tags": tags,
         "categories": categories,
         "brands": brands,
-        
-        # "recently_lunched_items": recently_lunched_items,
     }

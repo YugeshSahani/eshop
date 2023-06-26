@@ -20,6 +20,5 @@ class ItemForm(forms.ModelForm):
             "status": forms.Select(attrs={"class": "form-control"}),
             "category": forms.Select(attrs={"class": "form-control"}),
             "brand": forms.Select(attrs={"class": "form-control"}),
-            "target_customer": forms.Select(attrs={"class": "form-control"}),
-            # "target_customer": forms.SelectMultiple(attrs={"class": "form-control"}),
+            "target_customer": forms.SelectMultiple(attrs={"class": "form-control"}),
         }

@@ -1,3 +1,34 @@
+.pagination.pagination-horizontal {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+}
+
+ul.pagination.pagination-horizontal li {
+  display: inline-block;
+}
+
+ul.pagination.pagination-horizontal li.page-item:not(:last-child) {
+  margin-right: 10px;
+}
+
+ul.pagination.pagination-horizontal .page-link {
+  padding: 8px 12px;
+}
+
+ul.pagination.pagination-horizontal .page-link:hover {
+  background-color: #f8f8f8;
+}
+
+ul.pagination.pagination-horizontal .page-item.active .page-link {
+  background-color: #333;
+  color: #fff;
+}
+
+ul.pagination.pagination-horizontal .page-link:focus {
+  box-shadow: none;
+  outline: none;
+}
 
 
 body {

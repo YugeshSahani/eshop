@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'cart',
 
     'django_summernote',
-    'rest_framework',
+    
 ]
 
 MIDDLEWARE = [

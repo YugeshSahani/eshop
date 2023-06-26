@@ -215,7 +215,7 @@ class SearchItemView(View):
 
         # pagination start
         page = request.GET.get("page", 1)
-        paginate_by = 2
+        paginate_by = 3
         paginator = Paginator(item_list, paginate_by)
         try:
             items = paginator.page(page)
@@ -228,3 +228,17 @@ class SearchItemView(View):
             self.template_name,
             {"page_obj": items, "query": query},
         )
+
+class ItemByCategoryView(ListView):
+    model = Item
+    template_name = "eshop/search_item.html"
+    context_object_name = "items"
+
+    def get_queryset(self):
+        query = super().get_queryset()
+        query = query.filter(
+            listed_at__isnull=False,
+            category=self.kwargs["category_id"],
+        )
+        print(query)
+        return query

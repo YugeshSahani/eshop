@@ -11,7 +11,6 @@ from django.views.generic import ListView, DetailView, View, CreateView, UpdateV
 
 #
 
-
 class ItemCreateView(LoginRequiredMixin, CreateView):
     model = Item
     template_name = "seller/item_create.html"
@@ -23,14 +22,14 @@ class ItemCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-class ItemListView(ListView):
+class ItemListView(LoginRequiredMixin, ListView):
     model = Item
     template_name = "seller/item_list.html"
     queryset = Item.objects.filter(listed_at__isnull=False)
     context_object_name = "items"
 
 
-class ItemDetailView(DetailView):
+class ItemDetailView(LoginRequiredMixin, DetailView):
     model = Item
     template_name = "seller/item_detail.html"
     context_object_name = "item"

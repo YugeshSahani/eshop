@@ -10,6 +10,8 @@ from cart.models import CartItems, Cart
 from shop_app.models import Item, Category, Brand
 from shop_app.forms import NewsletterForm
 from django.http import JsonResponse
+from django.db.models.query import QuerySet
+
 
 
 # from django.views.generic.base import View
@@ -233,12 +235,30 @@ class ItemByCategoryView(ListView):
     model = Item
     template_name = "eshop/search_item.html"
     context_object_name = "items"
+    paginate_by = 2
+
 
     def get_queryset(self):
         query = super().get_queryset()
         query = query.filter(
             listed_at__isnull=False,
-            category=self.kwargs["category_id"],
+            category=self.kwargs["category_id"]
         )
-        print(query)
+
+        return query
+    
+class ItemByBrandView(ListView):
+    model = Item
+    template_name = "eshop/search_item.html"
+    context_object_name = "items"
+    paginate_by = 2
+
+
+    def get_queryset(self):
+        query = super().get_queryset()
+        query = query.filter(
+            listed_at__isnull=False,
+            brand=self.kwargs["brand_id"]
+        )
+
         return query

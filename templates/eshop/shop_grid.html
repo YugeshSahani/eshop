@@ -47,7 +47,9 @@
 						<h3 class="title">Brand</h3>
 						<ul class="categor-list">
 							{% for brand in brands %}
-							<li><a href="#">{{ brand.name }}</a></li>
+
+							<li><a href="{% url 'item-by-brand' brand.pk %}">{{ brand.name|title }}</a></li>
+
 							{% endfor %}
 						</ul>
 					</div>

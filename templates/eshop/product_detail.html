@@ -112,18 +112,8 @@
 				<div class="blog-single-main">
 					<div class="row">
 						<div class="col-12">
-							<div class="blog-detail">
-								<h2 class="blog-title">What are the secrets to start- up success?</h2>
-							</div>
-							<div class="content">
-								<p>What a crazy time. I have five children in colleghigh school graduates.jpge or
-									pursing post graduate studies Each of my children attends college far from home,
-									the closest of which is more than 800 miles away. While I miss being with my
-									older children, I know that a college experience can be the source of great
-									growth and experience can be the source of source of great growth and can
-									provide them with even greater in future.</p>
+							{{ item.detail|safe}}
 
-							</div>
 						</div>
 
 					</div>
@@ -159,18 +149,18 @@
 							</div>
 							<!-- End Single Comment -->
 							<!-- Single Comment -->
+							{% for comment in item.comment_set.all %}
 							<div class="single-comment">
-								<img src="https://via.placeholder.com/80x80" alt="#">
+								<img src="https://via.placeholder.com/80x80" alt="{{ comment.name }}">
 								<div class="content">
-									<h4>megan mart <span>Feb 28, 2018 at 8:59 pm</span></h4>
-									<p>Enthusiastically leverage existing premium quality vectors with
-										enterprise-wide innovation collaboration Phosfluorescently leverage others
-										enterprisee Phosfluorescently leverage.</p>
+									<h4>{{ comment.name }}<span>{{ comment.created_at }}</span></h4>
+									<p>{{ comment.comment}}</p>
 									<div class="button">
 										<a href="#" class="btn"><i class="fa fa-reply" aria-hidden="true"></i>Reply</a>
 									</div>
 								</div>
 							</div>
+							{% endfor %}
 							<!-- End Single Comment -->
 						</div>
 					</div>
@@ -179,24 +169,33 @@
 							<div class="reply-head">
 								<h2 class="reply-title">Leave a Comment</h2>
 								<!-- Comment Form -->
-								<form class="form" action="#">
+								<form class="form" action="{% url 'comment' %}" id="commentForm" method="POST">
+									{% csrf_token %}
+									<input type="hidden" name="item" value="{{ item.id }}">
 									<div class="row">
 										<div class="col-lg-6 col-md-6 col-12">
 											<div class="form-group">
 												<label>Your Name<span>*</span></label>
-												<input type="text" name="name" placeholder="" required="required">
+												<input type="text" name="name" id="name" placeholder=""
+													required="required">
+												{{ form.name.errors }}
+
 											</div>
 										</div>
 										<div class="col-lg-6 col-md-6 col-12">
 											<div class="form-group">
 												<label>Your Email<span>*</span></label>
-												<input type="email" name="email" placeholder="" required="required">
+												<input type="email" name="email" id="email" placeholder=""
+													required="required">
+												{{ form.email.errors }}
+
 											</div>
 										</div>
 										<div class="col-12">
 											<div class="form-group">
-												<label>Your Message<span>*</span></label>
-												<textarea name="message" placeholder=""></textarea>
+												<label>Your Comment<span>*</span></label>
+												<textarea name="comment" id="comment" placeholder=""></textarea>
+												{{ form.comment.errors }}
 											</div>
 										</div>
 										<div class="col-12">

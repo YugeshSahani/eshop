@@ -8,9 +8,10 @@ from django.views.generic import ListView, TemplateView, View, DetailView
 from django.contrib.auth.views import LoginView
 from cart.models import CartItems, Cart
 from shop_app.models import Item, Category, Brand
-from shop_app.forms import NewsletterForm
+from shop_app.forms import NewsletterForm, ContactForm, CommentForm
 from django.http import JsonResponse
 from django.db.models.query import QuerySet
+from django.contrib import messages
 
 
 
@@ -52,8 +53,46 @@ class SellerLoginView(LoginView):
         return reverse("seller:item-list")
 
 
-class Contact(TemplateView):
-    template_name = "eshop/contact.html"
+# class Contact(TemplateView):
+#     template_name = "eshop/contact.html"
+
+class ContactView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, "eshop/contact.html")
+
+    def post(self, request, *args, **kwargs):
+        form = ContactForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, "Successfully submitted your query. We will contact you soon."
+            )
+            return redirect("contact")
+        else:
+            messages.error(
+                request,
+                "Cannot submit your query. Please make sure all fields are valid.",
+            )
+            return render(
+                request,
+                "eshop/contact.html",
+                {"form": form},
+            )
+        
+class CommentView(View):
+    def post(self, request, *args, **kwargs):
+        form = CommentForm(request.POST)
+        item_id = request.POST["item"]
+        if form.is_valid():
+            form.save()
+            return redirect("detail", item_id)
+        else:
+            item = Item.objects.get(id=item_id)
+            return render(
+                request,
+                "esho/product_detail.html",
+                {"item": item, "form": form},
+            )
 
 
 class About(TemplateView):

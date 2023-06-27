@@ -72,7 +72,7 @@
 										<div class="product-img">
 											<a href="{% url 'detail' i.pk %}">
 												<img class="default-img" src="{{ i.featured_image.url }}"
-													alt="#">
+													alt="{{ i.name }}">
 												<img class="hover-img" src="{{ i.featured_image.url }}"
 													alt="#">
 											</a>
